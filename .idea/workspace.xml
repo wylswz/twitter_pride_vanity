@@ -3,28 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bc78b9e1-4670-4de0-bb05-ae1b75d4ee91" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/Components/Contents/ContentIndex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/Components/Contents/Exp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/Components/Contents/Map.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/Components/Contents/Tweets.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/Components/General/ContentRoute.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/Components/Menus/SiderMenu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/Pages/MainPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/serviceWorker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twt-analysis/src/urls.js" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -110,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/front-end/src/Components/Menus/SiderMenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+            <state relative-caret-position="336">
+              <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -184,6 +162,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -195,7 +174,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,21 +210,22 @@
       <option name="presentableId" value="Default" />
       <updated>1552786552923</updated>
       <workItem from="1552786554077" duration="12776000" />
-      <workItem from="1552806359983" duration="1129000" />
+      <workItem from="1552806359983" duration="2002000" />
+      <workItem from="1552866219422" duration="71000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13905000" />
+    <option name="totallyTimeSpent" value="14849000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.24972677" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.24972677" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.32894737" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.32894737" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
@@ -358,8 +337,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/Components/Menus/SiderMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        <state relative-caret-position="336">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
