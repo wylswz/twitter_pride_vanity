@@ -1,5 +1,4 @@
 import tensorflow as tf
-from layers.pooling import spatial_pyramid_pooling
 
 
 class Siamese:
@@ -73,7 +72,7 @@ class Siamese:
                 reuse=True
             )
 
-            '''pool2 = tf.layers.max_pooling2d(
+            pool2 = tf.layers.max_pooling2d(
                 inputs=conv2,
                 pool_size=(2, 2),
                 strides=2
@@ -99,15 +98,7 @@ class Siamese:
                 units=1024,
                 activation=tf.nn.relu,
                 reuse=True
-            )'''
-            conv2flat = spatial_pyramid_pooling(inputs=conv2,
-                                                bins=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                                                name="SPP",
-                                                )
-            conv2flat_ = spatial_pyramid_pooling(inputs=conv2_,
-                                                 bins=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                                                 name="SPP",
-                                                 reuse=True)
+            )
 
             dense = tf.layers.dense(
                 name="dense",

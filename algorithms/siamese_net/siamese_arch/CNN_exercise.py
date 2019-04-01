@@ -1,6 +1,5 @@
 import tensorflow as tf
 import numpy as np
-from .layers.pooling import spatial_pyramid_pooling
 
 bins = [1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 30]
 
@@ -73,43 +72,21 @@ def cnn_model_fn(features, labels, mode):
             strides=2
         )
 
-        #pool2flat = tf.reshape(pool2, (-1, 32 * 32 * 32))
-        #pool2flat_ = tf.reshape(pool2_, (-1, 32 * 32 * 32))
-        '''dense = tf.layers.dense(
-            name="dense",
-            inputs=pool2flat,
-            units=1024,
-            activation=tf.nn.relu
-        )
-        dense_ = tf.layers.dense(
-            name="dense",
-            inputs=pool2flat_,
-            units=1024,
-            activation=tf.nn.relu,
-            reuse=True
-        )'''
-        conv2flat = spatial_pyramid_pooling(inputs=conv2,
-                                        bins=[1,2,3,4,5,6,7,8,9,10],
-                                        name="SPP",
-                                        )
-        conv2flat_ = spatial_pyramid_pooling(inputs=conv2_,
-                                         bins=[1,2,3,4,5,6,7,8,9,10],
-                                         name="SPP",
-                                         reuse=True)
-
         dense = tf.layers.dense(
             name="dense",
-            inputs=conv2flat,
+            inputs=pool2,
             units=1024,
             activation=tf.nn.relu
         )
         dense_ = tf.layers.dense(
             name="dense",
-            inputs=conv2flat_,
+            inputs=pool2_,
             units=1024,
             activation=tf.nn.relu,
             reuse=True
         )
+
+
         dropout = tf.layers.dropout(
             inputs=dense,
             rate=0.4,
