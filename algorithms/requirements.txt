@@ -5,10 +5,11 @@ backcall==0.1.0
 bleach==3.1.0
 contextlib2==0.5.5
 cycler==0.10.0
-Cython==0.29.6
+Cython
 decorator==4.4.0
 defusedxml==0.5.0
 entrypoints==0.3
+flask
 gast==0.2.2
 grpcio==1.19.0
 h5py==2.9.0
@@ -33,8 +34,7 @@ mistune==0.8.4
 mock==2.0.0
 nbconvert==5.4.1
 nbformat==4.4.0
-notebook==5.7.7
-numpy==1.16.2
+numpy
 pandocfilters==1.4.2
 parso==0.3.4
 pbr==5.1.3
@@ -56,7 +56,7 @@ Send2Trash==1.5.0
 six==1.12.0
 tensorboard==1.13.1
 tensorflow-estimator==1.13.0
-tensorflow-gpu==1.13.1
+tensorflow==1.13.1
 termcolor==1.1.0
 terminado==0.8.2
 testpath==0.4.2
@@ -66,3 +66,4 @@ wcwidth==0.1.7
 webencodings==0.5.1
 Werkzeug==0.15.1
 widgetsnbextension==3.4.2
+

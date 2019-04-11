@@ -2,12 +2,8 @@ from shared.ModelWrapper import ModelWrapper
 import tensorflow as tf
 import PIL.Image as IMG
 import numpy as np
-from matplotlib import pyplot as plt
-import matplotlib
 from object_detection.utils import ops as utils_ops
-from object_detection.utils import label_map_util
-from object_detection.utils import visualization_utils as vis_util
-matplotlib.use('TkAgg')
+
 
 
 class FaceDetectionWrapper(ModelWrapper):
@@ -21,7 +17,14 @@ class FaceDetectionWrapper(ModelWrapper):
         return np.array(image.getdata()).reshape(
             (im_height, im_width, 3)).astype(np.uint8)
 
-    def load(self):
+    def _load_binary_image_into_numpy_array(self, image: bytes):
+
+        temp_img: IMG = IMG.open(image)
+        (im_width, im_height) = temp_img.size
+        return np.array(temp_img).reshape(
+            (im_height, im_width, 3)).astype(np.uint8)
+
+    def load_model(self):
         ckpt = tf.train.latest_checkpoint(self.model_path)
         sess = tf.Session()
         saver = tf.train.import_meta_graph(str(ckpt) + '.meta')
@@ -37,30 +40,14 @@ class FaceDetectionWrapper(ModelWrapper):
     def postprocess(self, *args, **kwargs):
         pass
 
-    def get_result(self, *args, **kwargs):
-        output_dict = self.predict()
 
-        category_index = label_map_util.create_category_index_from_labelmap("/home/johnny/RCNN/dataset/face.pbtxt",
-                                                                            use_display_name=False)
-        vis_util.visualize_boxes_and_labels_on_image_array(
-            self.sample,
-            output_dict['detection_boxes'],
-            output_dict['detection_classes'],
-            output_dict['detection_scores'],
-            category_index,
-            instance_masks=output_dict.get('detection_masks'),
-            use_normalized_coordinates=True,
-            line_thickness=8)
-        plt.figure(figsize=(12, 8))
-        plt.imshow(self.sample)
-        plt.show()
 
-    def load_sample(self, image_path):
-        image = IMG.open(image_path)
-        image_data = self._load_image_into_numpy_array(image)
-        self.sample = image_data
 
-    def predict(self):
+
+    def predict(self, image):
+        sample  = self._load_binary_image_into_numpy_array(image)
+        # load binary image
+
         ops = self.graph.get_operations()
         all_tensor_names = {output.name for op in ops for output in op.outputs}
         tensor_dict = {}
@@ -80,17 +67,18 @@ class FaceDetectionWrapper(ModelWrapper):
             detection_boxes = tf.slice(detection_boxes, [0, 0], [real_num_detection, -1])
             detection_masks = tf.slice(detection_masks, [0, 0, 0], [real_num_detection, -1, -1])
             detection_masks_reframed = utils_ops.reframe_box_masks_to_image_masks(
-                detection_masks, detection_boxes, self.sample.shape[0], self.sample.shape[1])
+                detection_masks, detection_boxes, sample.shape[0], sample.shape[1])
             detection_masks_reframed = tf.cast(
                 tf.greater(detection_masks_reframed, 0.5), tf.uint8)
             # Follow the convention by adding back the batch dimension
             tensor_dict['detection_masks'] = tf.expand_dims(
                 detection_masks_reframed, 0)
+
         image_tensor = self.graph.get_tensor_by_name('image_tensor:0')
 
         # Run inference
         output_dict = self.sess.run(tensor_dict,
-                               feed_dict={image_tensor: np.expand_dims(self.sample, 0)})
+                               feed_dict={image_tensor: np.expand_dims(sample, 0)})
 
         # all outputs are float32 numpy arrays, so convert types as appropriate
         output_dict['num_detections'] = int(output_dict['num_detections'][0])
@@ -100,7 +88,11 @@ class FaceDetectionWrapper(ModelWrapper):
         output_dict['detection_scores'] = output_dict['detection_scores'][0]
         if 'detection_masks' in output_dict:
             output_dict['detection_masks'] = output_dict['detection_masks'][0]
+
+        print(output_dict)
+        # box: [ymin, xmin, ymax, xmax]
         return output_dict
+
 
 
 
@@ -111,9 +103,8 @@ if __name__ == "__main__":
     MODEL_PATH = "/home/johnny/RCNN/temp_final"
 
     wrapper = FaceDetectionWrapper(MODEL_PATH)
-    wrapper.load()
-    wrapper.load_sample('./test.jpg')
+    wrapper.load_model()
     pred_dict = wrapper.predict()
-    wrapper.get_result()
+    #wrapper.get_result()
     #IMG.fromarray(wrapper.sample).show()
 

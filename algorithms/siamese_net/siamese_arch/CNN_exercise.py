@@ -3,9 +3,11 @@ import numpy as np
 
 bins = [1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 30]
 
-def cnn_model_fn(features, labels, mode):
+def cnn_model_fn(features, labels, mode, params):
     device_name = "/cpu:0"
     print(tf.test.is_gpu_available)
+    print("Session: =======================================")
+
     if tf.test.is_gpu_available():
         device_name = "/gpu:0"
     with tf.device(device_name):
