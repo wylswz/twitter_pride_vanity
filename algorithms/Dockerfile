@@ -1,7 +1,6 @@
 FROM wylswz/face_detection:0.2
 
-ADD . /algorithms
-
+ADD ./requirements.txt /algorithms/requirements.txt
 ENTRYPOINT ["cd", "/algorithms"]
 EXPOSE 80/tcp
 EXPOSE 80/udp

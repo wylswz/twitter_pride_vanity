@@ -17,12 +17,12 @@ def build_net(config, sess):
 
 if __name__ == "__main__":
     config = {
-        "saved_model_path":"/home/johnny/Desktop/pure_convnet_models/resnet_v2_50/eval.graph",
+        "saved_model_path": "/home/johnny/Desktop/pure_convnet_models/resnet_v2_50/eval.graph",
         "checkpoint_path": '/home/johnny/Documents/TF_CONFIG/finetune/resv2/model.ckpt'
     }
     with tf.Session() as sess:
         feed_image_np = np.zeros([25, 305, 305, 3], dtype=np.float)
-        build_net(config,sess)
+        build_net(config, sess)
 
         input_tensor = sess.graph.get_tensor_by_name("resnet_v2_50/ImageInput:0")
         output_tensor = sess.graph.get_tensor_by_name("resnet_v2_50/conv1/BiasAdd:0")
