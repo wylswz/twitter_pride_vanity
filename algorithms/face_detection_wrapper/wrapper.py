@@ -14,15 +14,17 @@ class FaceDetectionWrapper(ModelWrapper):
 
     def _load_image_into_numpy_array(self, image):
         (im_width, im_height) = image.size
+        mode = image.mode
         return np.array(image.getdata()).reshape(
-            (im_height, im_width, 3)).astype(np.uint8)
+            (im_height, im_width, len(mode))).astype(np.uint8)
 
     def _load_binary_image_into_numpy_array(self, image: bytes):
 
         temp_img: IMG = IMG.open(image)
         (im_width, im_height) = temp_img.size
+        mode = temp_img.mode
         return np.array(temp_img).reshape(
-            (im_height, im_width, 3)).astype(np.uint8)
+            (im_height, im_width, len(mode))).astype(np.uint8)
 
     def load_model(self):
         ckpt = tf.train.latest_checkpoint(self.model_path)

@@ -47,7 +47,7 @@ def detection():
             with open(temp_filename, 'wb') as fp:
                 fp.write(resp.content)
             ml_res = fdw.predict(open(temp_filename, 'rb'))
-            os.remove(temp_filename)
+            os.remove(temp_filename) 
 
         limit = request.form.get('limit')
         faces = ml_res['detection_boxes'].tolist()
