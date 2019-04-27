@@ -23,7 +23,7 @@ class FaceDetectionWrapper(ModelWrapper):
         temp_img: IMG = IMG.open(image)
         (im_width, im_height) = temp_img.size
         mode = temp_img.mode
-        return temp_image
+        return temp_img
         #return np.array(temp_img).reshape(
         #    (im_height, im_width, len(mode))).astype(np.uint8)
 
