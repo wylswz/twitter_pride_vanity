@@ -38,7 +38,7 @@ class FaceDetectionWrapper(ModelWrapper):
 
 
     def preprocess(self, image, *args, **kwargs):
-        rgb_image = image.convert("RGB")
+        rgb_img = image.convert("RGB")
         return np.array(rgb_img).reshape(
             (im_height, im_width, 3)).astype(np.uint8)
 
