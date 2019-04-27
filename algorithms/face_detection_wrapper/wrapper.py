@@ -14,16 +14,18 @@ class FaceDetectionWrapper(ModelWrapper):
     def _load_image_into_numpy_array(self, image):
         (im_width, im_height) = image.size
         mode = image.mode
-        return np.array(image.getdata()).reshape(
-            (im_height, im_width, len(mode))).astype(np.uint8)
+        return image
+        #return np.array(image.getdata()).reshape(
+        #    (im_height, im_width, len(mode))).astype(np.uint8)
 
     def _load_binary_image_into_numpy_array(self, image: bytes):
 
         temp_img: IMG = IMG.open(image)
         (im_width, im_height) = temp_img.size
         mode = temp_img.mode
-        return np.array(temp_img).reshape(
-            (im_height, im_width, len(mode))).astype(np.uint8)
+        return image
+        #return np.array(temp_img).reshape(
+        #    (im_height, im_width, len(mode))).astype(np.uint8)
 
     def load_model(self):
         ckpt = tf.train.latest_checkpoint(self.model_path)
@@ -36,7 +38,10 @@ class FaceDetectionWrapper(ModelWrapper):
 
 
     def preprocess(self, image, *args, **kwargs):
-        return image.convert("RGB")
+        rgb_image = image.convert("RGB")
+        return np.array(rgb_img).reshape(
+            (im_height, im_width, 3)).astype(np.uint8)
+
         
 
     def postprocess(self, *args, **kwargs):
@@ -47,9 +52,9 @@ class FaceDetectionWrapper(ModelWrapper):
 
 
     def predict(self, image):
-        sample  = self._load_binary_image_into_numpy_array(image)
+        sample_image  = self._load_binary_image_into_numpy_array(image)
         # load binary image
-        sample = self.preprocess(sample)
+        sample = self.preprocess(sample_image)
 
         ops = self.graph.get_operations()
         all_tensor_names = {output.name for op in ops for output in op.outputs}
