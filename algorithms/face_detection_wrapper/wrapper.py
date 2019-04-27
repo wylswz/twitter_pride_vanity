@@ -49,7 +49,7 @@ class FaceDetectionWrapper(ModelWrapper):
     def predict(self, image):
         sample  = self._load_binary_image_into_numpy_array(image)
         # load binary image
-        sample = self.convert("RGB")
+        sample = self.preprocess(sample)
 
         ops = self.graph.get_operations()
         all_tensor_names = {output.name for op in ops for output in op.outputs}
