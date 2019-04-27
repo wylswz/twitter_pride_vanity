@@ -39,13 +39,14 @@ class FaceDetectionWrapper(ModelWrapper):
 
     def preprocess(self, image, *args, **kwargs):
         rgb_img = image.convert("RGB")
+        (im_width, im_height) = rgb_img.size
         return np.array(rgb_img).reshape(
             (im_height, im_width, 3)).astype(np.uint8)
 
         
 
-    def postprocess(self, *args, **kwargs):
-        pass
+    def postprocess(self,res_dict, *args, **kwargs):
+        return res_dict
 
 
     def predict(self, image):
@@ -96,7 +97,7 @@ class FaceDetectionWrapper(ModelWrapper):
 
         print(output_dict)
         # box: [ymin, xmin, ymax, xmax]
-        return output_dict
+        return self.postprocess(output_dict)
 
 
 
