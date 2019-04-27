@@ -5,7 +5,6 @@ import numpy as np
 from object_detection.utils import ops as utils_ops
 
 
-
 class FaceDetectionWrapper(ModelWrapper):
 
     def __init__(self, model_path):
@@ -36,8 +35,9 @@ class FaceDetectionWrapper(ModelWrapper):
         self.sess = sess
 
 
-    def preprocess(self, *args, **kwargs):
-        pass
+    def preprocess(self, image, *args, **kwargs):
+        return image.convert("RGB")
+        
 
     def postprocess(self, *args, **kwargs):
         pass
@@ -49,6 +49,7 @@ class FaceDetectionWrapper(ModelWrapper):
     def predict(self, image):
         sample  = self._load_binary_image_into_numpy_array(image)
         # load binary image
+        sample = self.convert("RGB")
 
         ops = self.graph.get_operations()
         all_tensor_names = {output.name for op in ops for output in op.outputs}
