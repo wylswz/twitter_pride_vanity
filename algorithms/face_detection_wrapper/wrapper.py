@@ -23,7 +23,7 @@ class FaceDetectionWrapper(ModelWrapper):
         temp_img: IMG = IMG.open(image)
         (im_width, im_height) = temp_img.size
         mode = temp_img.mode
-        return image
+        return temp_image
         #return np.array(temp_img).reshape(
         #    (im_height, im_width, len(mode))).astype(np.uint8)
 
@@ -46,9 +46,6 @@ class FaceDetectionWrapper(ModelWrapper):
 
     def postprocess(self, *args, **kwargs):
         pass
-
-
-
 
 
     def predict(self, image):
