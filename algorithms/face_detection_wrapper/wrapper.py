@@ -100,11 +100,6 @@ class FaceDetectionWrapper(ModelWrapper):
         return self.postprocess(output_dict)
 
 
-
-
-
-
-
 if __name__ == "__main__":
     MODEL_PATH = "/home/johnny/RCNN/temp_final"
 

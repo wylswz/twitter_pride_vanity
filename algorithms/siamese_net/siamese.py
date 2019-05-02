@@ -8,6 +8,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import Adam
 from keras import backend as K
 from keras.utils import np_utils
+from keras.engine import input_layer
 from sklearn.model_selection import train_test_split
 import math
 import sys
@@ -21,7 +22,7 @@ import random
 import keras
 import tensorflow as tf
 
-config = tf.ConfigProto( device_count = {'GPU': 1 , 'CPU': 56} ) 
+config = tf.ConfigProto( device_count = {'GPU': 2 , 'CPU': 16} ) 
 sess = tf.Session(config=config) 
 keras.backend.set_session(sess)
 
@@ -36,8 +37,8 @@ def load_data(path):
             dic_data[identity].append(data)
     return dic_data
 
-ptd = load_data('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_test/test/test_list.txt')
-ntd = load_data('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_test/test/test_list.txt')
+ptd = load_data('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_train/train/train_list.txt')
+ntd = load_data('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_train/train/train_list.txt')
 
 def postive_training_set():
     postive_pair = []
@@ -94,7 +95,7 @@ def tranfor_data(data):
 
 data = tranfor_data(data)
 
-IMAGE_DIR = os.path.join('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_test', "test")
+IMAGE_DIR = os.path.join('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_train', "train")
 
 
 def load_image_cache(image_cache, image_filename):
@@ -127,13 +128,15 @@ def pair_generator(triples, datagens, batch_size=32):
         # shuffle once per batch
         indices = np.random.permutation(np.arange(len(triples)))
         num_batches = len(triples) // batch_size
+        X1 = np.zeros((batch_size, 128, 128, 3))
+        X2 = np.zeros((batch_size, 128, 128, 3))
+        Y = np.zeros((batch_size, 2))
         for bid in range(num_batches):
             batch_indices = indices[bid * batch_size : (bid + 1) * batch_size]
             batch = [triples[i] for i in batch_indices]
-            X1 = np.zeros((batch_size, 128, 128, 3))
-            X2 = np.zeros((batch_size, 128, 128, 3))
-            Y = np.zeros((batch_size, 2))
+            
             for i, (image_filename_l, image_filename_r, label) in enumerate(batch):
+                #print(image_filename_l,image_filename_r,label)
                 if datagens is None or len(datagens) == 0:
                     X1[i] = im_decoder(image_filename_l)#image_cache[image_filename_l]
                     X2[i] = im_decoder(image_filename_r)#image_cache[image_filename_r]
@@ -148,7 +151,7 @@ def cosine_distance(vecs, normalize=False):
     x, y = vecs
     if normalize:
         x = K.l2_normalize(x, axis=0)
-        y = K.l2_normalize(x, axis=0)
+        y = K.l2_normalize(y, axis=0)
     return K.prod(K.stack([x, y], axis=1), axis=1)
 
 def cosine_distance_output_shape(shapes):
@@ -157,57 +160,79 @@ def cosine_distance_output_shape(shapes):
 
 def get_siamese_model():
     # create the base pre-trained model
+    input_1 = input_layer.Input(shape=((128,128,3)))
+    input_2 = input_layer.Input(shape=((128,128,3)))
     base_model_1 = inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top=False, input_shape=(128,128,3))
-    base_model_2 = inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top=False, input_shape=(128,128,3))
+    #base_model_2 = inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top=False, input_shape=(128,128,3))
     ## train previous model or not
     for layer in base_model_1.layers:
         layer.trainable = False
         layer.name = layer.name + "_1"
-    for layer in base_model_2.layers:
-        layer.name = layer.name + "_2"
-        layer.trainable = False
+    #for layer in base_model_2.layers:
+    #    layer.name = layer.name + "_2"
+    #    layer.trainable = True
     
-    out_conv_1 = base_model_1.get_layer("conv_7b_ac_1").output
-    #out_conv_1 = Lambda(out_conv_1, output_shape=(None,8,8,1536))
-    out_conv_2 = base_model_1.get_layer("conv_7b_ac_1").output
-    #out_conv_2 = Lambda(out_conv_2, output_shape=(None,8,8,1536))
-    
+    #out_conv_1 = base_model_1.get_layer("conv_7b_ac_1").output
+    #out_conv_2 = base_model_1.get_layer("conv_7b_ac_1").output
+    out_conv_1 = base_model_1(input_1)
+    out_conv_2 = base_model_1(input_2)
     #vector_1 = base_model_1.get_layer("avg_pool_1").output
     #vector_2 = base_model_2.get_layer("avg_pool_2").output
     vector_1 = GlobalAveragePooling2D(data_format='channels_last')(out_conv_1)
+    vector_1 = Dense(512)(vector_1)
+    vector_1 = Dropout(0.2)(vector_1)
+    vector_1 = Activation("relu")(vector_1)
+    vector_1 = Dense(128)(vector_1)
+    vector_1 = Dropout(0.2)(vector_1)
+    vector_1 = Activation("relu")(vector_1)
+    vector_1 = Dense(32)(vector_1)
+    vector_1 = Activation("relu")(vector_1)
+    
     vector_2 = GlobalAveragePooling2D(data_format='channels_last')(out_conv_2)
+    vector_2 = Dense(512)(vector_2)
+    vector_2 = Dropout(0.2)(vector_2)
+    vector_2 = Activation("relu")(vector_2)
+    vector_2 = Dense(128)(vector_2)
+    vector_2 = Dropout(0.2)(vector_2)
+    vector_2 = Activation("relu")(vector_2)
+    vector_2 = Dense(32)(vector_2)
+    vector_2 = Activation("relu")(vector_2)
+
     # Add a customized layer to compute the absolute difference between the vectors
 
     distance = Lambda(cosine_distance,
                       output_shape=cosine_distance_output_shape)([vector_1, vector_2])
 
-    fc1 = Dense(512, kernel_initializer="glorot_uniform")(distance)
-    fc1 = Dropout(0.2)(fc1)
-    fc1 = Activation("relu")(fc1)
-    fc1 = Dense(128, kernel_initializer="glorot_uniform")(fc1)
+    #fc1 = Dense(512, kernel_initializer="glorot_uniform")(distance)
+    #fc1 = Dropout(0.2)(fc1)
+    #fc1 = Activation("relu")(fc1)
+    fc1 = Dense(128, kernel_initializer="glorot_uniform")(distance)
     fc1 = Dropout(0.2)(fc1)
     fc1 = Activation("relu")(fc1)
     pred = Dense(2, kernel_initializer="glorot_uniform")(fc1)
     pred = Activation("softmax")(pred)
 
-    siamese_net = Model(inputs=[base_model_1.input, base_model_2.input], outputs=pred)
-
+    siamese_net = Model(inputs=[input_1, input_2], outputs=pred)
+    #siamese_net = Model(inputs=[base_model_1.input, base_model_2.input], outputs=pred)
     return siamese_net
 
 model = get_siamese_model()
 model.summary()
-data_train, data_val = train_test_split(data, train_size=0.9)
+data_train, data_val = train_test_split(data, train_size=0.8)
 
-datagen_args = dict(rotation_range=10,
+datagen_args = dict(
+    rescale=1.0/255.0,
+    rotation_range=10,
+    samplewise_std_normalization=True,
                     width_shift_range=0.2,
                     height_shift_range=0.2,
                     zoom_range=0.2)
 datagens = [ImageDataGenerator(**datagen_args),
             ImageDataGenerator(**datagen_args)]
-train_pair_gen = pair_generator(data_train, datagens, 32)
-val_pair_gen = pair_generator(data_val, None, 32)
-
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+train_pair_gen = pair_generator(data_train, datagens, 16)
+val_pair_gen = pair_generator(data_val, None, 16)
+adam = keras.optimizers.Adam(lr=0.001)
+model.compile(loss="categorical_crossentropy", optimizer=adam, metrics=["accuracy"])
 num_train_steps = math.floor(len(data_train)/32)
 num_valid_steps = math.floor(len(data_val)/32)
 

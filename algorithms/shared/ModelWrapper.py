@@ -1,9 +1,5 @@
 class ModelWrapper:
 
-    model_path = None
-    sample = None
-    result = None
-    ckpt = None
 
     def __init__(self, model_path):
         self.model_path = model_path
@@ -11,7 +7,7 @@ class ModelWrapper:
 
     def load(self):
         """
-        Load model
+        Load model using self.model_path
         :return:
         """
         raise NotImplementedError
@@ -20,6 +16,7 @@ class ModelWrapper:
         
         """
         Pre-process the input to the model
+        Executed at the beginning of predict()
         :param args:
         :param kwargs:
         :return:
@@ -29,17 +26,24 @@ class ModelWrapper:
     def postprocess(self, *args, **kwargs):
         """
         Post-process the output of the model
+        Executed before the return clause in predict()
         :param args:
         :param kwargs:
         :return:
         """
         raise NotImplementedError
 
-    def get_result(self, *args, **kwargs):
-        raise NotImplementedError
-
-    def load_sample(self, *args, **kwargs):
-        raise NotImplementedError
 
     def predict(self, *args, **kwargs):
+        """
+        Predict the result giving data
+
+        self.preprocess()
+
+        result = ... Do sth here
+
+        result = self.postprocess()
+
+        return result
+        """
         raise NotImplementedError
