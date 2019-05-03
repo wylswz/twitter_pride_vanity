@@ -17,5 +17,7 @@ services:
     tty: true
     volumes:
       - ".:/algorithms"
+      - "/mnt/models/face_detection:/face_detection"
+      - "/mnt/models/face_comparison:/face_comparison"
     stdin_open: true
 

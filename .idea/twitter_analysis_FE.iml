@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$/algorithms">
       <excludeFolder url="file://$MODULE_DIR$/algorithms/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.6 (algorithms)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.6 (twitter_pride_vanity)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
