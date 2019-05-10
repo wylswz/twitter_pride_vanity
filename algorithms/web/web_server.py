@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from face_detection_wrapper.wrapper import FaceDetectionWrapper
+from siamese_wrapper.SiameseWrapper import FaceVerification
 import os
 import traceback
 import requests
@@ -16,12 +17,15 @@ TEMP_PATH='/var/flask_temp/'
 app = Flask(__name__)
 try:
     model_path = os.environ['DETECTION_MODEL_PATH']
+    comparison_model_path = os.environ['DETECTION_WRAPPER_PATH']
 except KeyError:
     traceback.print_exc()
     exit(1)
 
 fdw = FaceDetectionWrapper(model_path)
+fvw = FaceVerification(comparison_model_path)
 fdw.load_model()
+fvw.load()
 
 
 if not os.path.isdir(TEMP_PATH):

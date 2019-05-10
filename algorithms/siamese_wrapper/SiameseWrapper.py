@@ -11,7 +11,7 @@ class FaceVerification:
         self.model_path = model_path
         pass
        
-    def im_decoder(image):
+    def im_decoder(self,image):
         image = Image.open(io.BytesIO(image))
         if image.mode != 'RGB':
             image = image.convert('RGB')
@@ -30,11 +30,11 @@ class FaceVerification:
         
         image1, image2 = input_images
         
-        return [im_decoder(image1), im_decoder(image1)]
+        return [self.im_decoder(image1), self.im_decoder(image1)]
                     
         
     def predict(self, input_images):    
         
-        result = self.model.predict(preprocess(input_images))
+        result = self.model.predict(self.preprocess(input_images))
         return result
         
