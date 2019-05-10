@@ -17,7 +17,7 @@ TEMP_PATH='/var/flask_temp/'
 app = Flask(__name__)
 try:
     model_path = os.environ['DETECTION_MODEL_PATH']
-    comparison_model_path = os.environ['DETECTION_WRAPPER_PATH']
+    comparison_model_path = os.environ['COMPARISON_MODEL_PATH']
 except KeyError:
     traceback.print_exc()
     exit(1)
@@ -33,7 +33,33 @@ if not os.path.isdir(TEMP_PATH):
 
 
 @app.route('/api/v1/face_comparison', methods=['POST'])
-    if request.method == 'POST':
+def comparison():
+    try:
+        if request.files.get('face_1') is not None:
+            face_1 = request.files['face_1']
+
+
+        if request.files.get('face_2') is not None:
+            face_2 = request.files['face_2']
+
+        res = fvw.predict([face_1, face_2])
+        print(res)
+        return jsonify({
+            "similarity": float(res[0][0]),
+            "Version":"Keras Application 1.0.7 @ Tensorflow 1.13 Backend",
+            "Model": {
+                "Info": "Siamese Network with Inception ResNet @ Iteration 4313 Epoch 4",
+                "url": "https://github.com/wylswz/twitter_pride_vanity/tree/master/algorithms/siamese_net",
+                "author": "Yenyung Chang",
+                "dataset": "vggface2",
+            }
+        })
+    except Exception as e:
+        return jsonify({
+            'error': str(e),
+
+        })
+
 
 
 @app.route('/api/v1/face_detection', methods=['POST'])
@@ -72,7 +98,13 @@ def detection():
 
                 'scores': scores,
                 'format': ['ymin', 'xmin', 'ymax', 'xmax'],
-                'version': 'Tensorflow Models Object-Detection @Iteration 4066'
+                'version': 'Tensorflow 1.13.1',
+                'model': {
+                    "url":"https://github.com/tensorflow/models/tree/master/research/object_detection",
+                    "info":"Faster RCNN Object-Detection @Iteration 4066",
+                    "dataset": "WIDERFace",
+                    "author": "Refer to url"
+                }
             })
         except Exception as e:
             return jsonify({

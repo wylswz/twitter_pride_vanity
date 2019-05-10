@@ -4,12 +4,12 @@ from keras.applications import inception_v3
 from PIL import Image
 import io
 import numpy as np
+from shared.ModelWrapper import ModelWrapper
+from tensorflow import Graph, Session
 
-
-class FaceVerification:
+class FaceVerification(ModelWrapper):
     def __init__(self, model_path):
-        self.model_path = model_path
-        pass
+        super().__init__(model_path=model_path)
        
     def im_decoder(self,image):
         image = Image.open(io.BytesIO(image))
@@ -22,19 +22,33 @@ class FaceVerification:
         return image
     
     def load(self):
-        
-        self.model = load_model(self.model_path)
+        self.graph1 = Graph()
+        with self.graph1.as_default():
+            self.session1 = Session()
+            with self.session1.as_default():
+                self.model = load_model(self.model_path)
         
         
     def preprocess(self, input_images):
         
         image1, image2 = input_images
+        image1 = image1.read()
+        image2 = image2.read()
         
-        return [self.im_decoder(image1), self.im_decoder(image1)]
+        return [self.im_decoder(image1), self.im_decoder(image2)]
                     
         
-    def predict(self, input_images):    
-        
-        result = self.model.predict(self.preprocess(input_images))
+    def predict(self, input_images):
+        with self.graph1.as_default():
+            with self.session1.as_default():
+                result = self.model.predict(self.preprocess(input_images))
         return result
         
+
+if __name__ == "__main__":
+    fv = FaceVerification("/mnt/models/face_comparison/model.h5")
+    fv.load()
+    image1 = open("trump1.jpg", "rb")
+    image2 = open("trump2.jpg", "rb")
+    res = fv.predict([image1,image2])
+    print(res)
