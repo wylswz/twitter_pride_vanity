@@ -3,5 +3,9 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="JSX" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (twitter_pride_vanity)" project-jdk-type="Python SDK" />
+>>>>>>> b2a14e5a26e2936d25880ee6b4d26f65b0ce5b35
 </project>
