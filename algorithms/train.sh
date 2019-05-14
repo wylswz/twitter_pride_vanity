@@ -1,7 +1,7 @@
 
 
 PIPELINE_CONFIG_PATH=/home/johnny/twitter_pride_vanity/algorithms/face_detection_config/faster_rcnn_resnet101_voc07.config
-
+PIPELINE_CONFIG_PATH=/home/johnny/twitter_pride_vanity/algorithms/face_detection_config/SSD.config
 MODEL_DIR=/home/johnny/RCNN/temp_train
 EXPORTED_MODEL_DIR=/home/johnny/RCNN/temp_final
 
