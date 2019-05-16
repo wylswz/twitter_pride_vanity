@@ -19,5 +19,6 @@ services:
       - ".:/algorithms"
       - "/mnt/models/face_detection:/face_detection"
       - "/mnt/models/face_comparison:/face_comparison"
+      - "/mnt/models/ssd:/ssd"
     stdin_open: true
 

@@ -10,6 +10,16 @@
 - image_url: Or you can give url of the image. If url and file are given at the 
 same time, file will be used
 - limit: Limit on number of bounding boxes.
+- model: The model used for face detection. Available models
+are
+    ```
+    'SSD_MOBILENET_V2'
+    'FASTER_RCNN_RESNET_101' # default
+    ```
+FASTER_RCNN_RESNET_101 has high precision and recall
+
+SSD_MOBILENET_V2 is very fast, but low precision. It can 
+detect at most 20 faces in one image
 
 ### Response
 

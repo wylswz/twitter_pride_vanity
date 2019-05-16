@@ -44,7 +44,7 @@ rm  -rf ${EXPORTED_MODEL_DIR}/*
 python3 /home/johnny/models/research/object_detection/export_inference_graph.py \
     --input_type image_tensor \
     --pipeline_config_path ${PIPELINE_CONFIG_PATH} \
-    --trained_checkpoint_prefix ${MODEL_DIR}/model.ckpt-4066 \
+    --trained_checkpoint_prefix ${MODEL_DIR}/model.ckpt-64225 \
     --output_directory ${EXPORTED_MODEL_DIR}
 
 
