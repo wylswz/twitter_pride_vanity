@@ -1,3 +1,5 @@
+# Author: Yunlu Wen <yunluw@student.unimelb.edu.au>
+
 from shared.ModelWrapper import ModelWrapper
 import tensorflow as tf
 import PIL.Image as IMG

@@ -2,12 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b019476-ea3d-4fa3-a0de-20f04ac41539" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/archive/siamese_arch/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chrisevans.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/test_pics/chrisevans.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/face_detection_wrapper/wrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/face_detection_wrapper/wrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/test.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/ModelWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/shared/ModelWrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/builders/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/builders/feature_extractor_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/builders/feature_extractor_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/builders/input_fn_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/builders/input_fn_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/builders/model_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/builders/model_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/feature_extractor/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/builders/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/feature_extractor/plain.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/feature_extractor/plain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/feature_extractor/resnetv2.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/feature_extractor/resnetv2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/siamese.py" beforeDir="false" afterPath="$PROJECT_DIR$/siamese_net/siamese.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/siamese_arch/CNN_exercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/siamese_arch/CNN_exercise.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/siamese_arch/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/feature_extractor/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/siamese_arch/plain_siamese_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/siamese_arch/plain_siamese_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/stream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_net/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siamese_wrapper/SiameseWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/siamese_wrapper/SiameseWrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/test_pics/test.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.png" beforeDir="false" afterPath="$PROJECT_DIR$/test_pics/test.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thor.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/test_pics/thor.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thor_bro" beforeDir="false" afterPath="$PROJECT_DIR$/test_pics/thor_bro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trump1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/test_pics/trump1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trump2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/test_pics/trump2.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/web_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/web_server.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,11 +41,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/siamese_wrapper/SiameseWrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="41" column="24" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="66">
+              <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/siamese_net/siamese.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -33,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/web_server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="48" column="47" lean-forward="true" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
+            <state relative-caret-position="22">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -42,23 +68,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="396">
-                <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              <first_editor relative-caret-position="264">
+                <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/train.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="43" selection-start-line="43" selection-end-line="47" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -69,10 +86,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/face_detection_wrapper/wrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="173" column="26" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
+            <state relative-caret-position="22">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -83,36 +105,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/face_detection_config/SSD.config">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3806">
-              <caret line="173" column="11" selection-start-line="173" selection-start-column="6" selection-end-line="173" selection-end-column="11" />
+            <state relative-caret-position="176">
+              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tmp/model/graph.pbtxt">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" column="34" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -129,24 +140,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/siamese_wrapper/SiameseWrapper.py" />
-        <option value="$PROJECT_DIR$/siamese_net/siamese.py" />
         <option value="$PROJECT_DIR$/face_detection_config/faster_rcnn_resnet101_voc07.config" />
         <option value="$PROJECT_DIR$/face_detection_config/SSD.config" />
         <option value="$PROJECT_DIR$/train.sh" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/face_detection_wrapper/wrapper.py" />
-        <option value="$PROJECT_DIR$/web/web_server.py" />
         <option value="$PROJECT_DIR$/README.md" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+        <option value="$PROJECT_DIR$/shared/ModelWrapper.py" />
+        <option value="$PROJECT_DIR$/siamese_wrapper/SiameseWrapper.py" />
+        <option value="$PROJECT_DIR$/web/web_server.py" />
+        <option value="$PROJECT_DIR$/siamese_net/stream.py" />
+        <option value="$PROJECT_DIR$/face_detection_wrapper/wrapper.py" />
+        <option value="$PROJECT_DIR$/siamese_net/siamese.py" />
       </list>
     </option>
   </component>
@@ -178,25 +183,7 @@
               <item name="algorithms" type="b2602c69:ProjectViewProjectNode" />
               <item name="algorithms" type="47feb1d3:ProjectViewModuleNode" />
               <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-              <item name="face_detection_config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="algorithms" type="b2602c69:ProjectViewProjectNode" />
-              <item name="algorithms" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="algorithms" type="462c0819:PsiDirectoryNode" />
               <item name="face_detection_wrapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="algorithms" type="b2602c69:ProjectViewProjectNode" />
-              <item name="algorithms" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-              <item name="siamese_wrapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="algorithms" type="b2602c69:ProjectViewProjectNode" />
-              <item name="algorithms" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -212,6 +199,10 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/archive" />
+      <recent name="$PROJECT_DIR$/test_pics" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/face_detection_config" />
     </key>
@@ -245,18 +236,18 @@
     <frame x="39" y="25" width="1881" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2497309" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2497309" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32937366" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -268,19 +259,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.config" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/siamese_net/siamese.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="41" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -301,30 +279,10 @@
     <entry file="file://$PROJECT_DIR$/tmp/model/graph.pbtxt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/face_detection_config/SSD.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3806">
-          <caret line="173" column="11" selection-start-line="173" selection-start-column="6" selection-end-line="173" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="34" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_history_log.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/face_detection_wrapper/wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="173" column="26" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -335,33 +293,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/siamese_wrapper/SiameseWrapper.py">
+    <entry file="file://$PROJECT_DIR$/shared/ModelWrapper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="41" column="24" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/web_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="48" column="47" lean-forward="true" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state>
+          <caret column="36" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="396">
-            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <first_editor relative-caret-position="264">
+            <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/face_detection_config/SSD.config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_history_log.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/archive/stream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="34" selection-end-line="1" />
+          <folding>
+            <element signature="e#53#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/face_detection_wrapper/wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/web_server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/siamese_wrapper/SiameseWrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/siamese_net/siamese.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
         </state>
       </provider>
     </entry>

@@ -1,8 +1,9 @@
 import tensorflow as tf
 import numpy as np
-from siamese_net.settings import TRAIN, EVAL
-from siamese_net.feature_extractor import plain, resnetv2
-from slim.nets import nets_factory
+from archive.settings import TRAIN
+from archive.feature_extractor import plain
+from archive.feature_extractor import resnetv2
+
 BUILDER_DICT = {
     "plain": plain,
     "resnetv2": resnetv2

@@ -1,7 +1,5 @@
-import tensorflow as tf
-import tarfile
-from PIL import Image
-import numpy as np
+# Author: Yunlu Wen <yunluw@student.unimelb.edu.au>
+
 import os, random
 import traceback
 

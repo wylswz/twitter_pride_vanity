@@ -1,3 +1,5 @@
+# Author: Yenyung Chang <yenyungc@student.unimelb.edu.au>
+
 from keras.models import load_model
 from keras.preprocessing.image import img_to_array
 from keras.applications import inception_v3

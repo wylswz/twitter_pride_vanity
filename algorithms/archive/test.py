@@ -1,12 +1,7 @@
 import tensorflow as tf
-import os
-import itertools
-from siamese_net import stream
-from siamese_net.siamese_arch.CNN_exercise import cnn_model_fn
-from siamese_net.feature_extractor.resnetv2 import build_net
-import ast
-import traceback
-
+from archive import stream
+from archive.siamese_arch.CNN_exercise import cnn_model_fn
+from archive.feature_extractor.resnetv2 import build_net
 
 image_dir = '/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_train/train/'
 generator = lambda: stream.file_dir_streamer(image_dir)

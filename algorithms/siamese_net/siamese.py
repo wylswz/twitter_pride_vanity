@@ -1,3 +1,5 @@
+# Author: Yenyung Chang <yenyungc@student.unimelb.edu.au>
+
 from __future__ import division, print_function
 
 import os

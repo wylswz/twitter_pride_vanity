@@ -1,3 +1,5 @@
+# Author: Yunlu Wen <yunluw@student.unimelb.edu.au>
+
 from flask import Flask, request, jsonify
 from face_detection_wrapper.wrapper import FaceDetectionWrapper, SSDWrapper
 from siamese_wrapper.SiameseWrapper import FaceVerification
