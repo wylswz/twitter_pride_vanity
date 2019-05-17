@@ -14,7 +14,7 @@ import numpy as np
 export FLASK_APP=face_detection_wrapper/web_server.py
 flask run
 '''
-TEMP_PATH='/var/flask_temp/'
+TEMP_PATH = '/var/flask_temp/'
 
 app = Flask(__name__)
 try:
@@ -32,13 +32,14 @@ ssdw.load()
 fdw.load()
 fvw.load()
 
-
 if not os.path.isdir(TEMP_PATH):
     os.makedirs(TEMP_PATH)
+
 
 class Models:
     FASTER_RCNN_RESNET_101 = "FASTER_RCNN_RESNET_101"
     SSD_MOBILENET_V2 = "SSD_MOBILENET_V2"
+
 
 @app.route('/api/v1/face_comparison', methods=['POST'])
 def comparison():
@@ -61,15 +62,15 @@ def comparison():
             temp_filename_2 = str(uuid.uuid4()) + '.' + affix
             with open(temp_filename_2, 'wb') as fp:
                 fp.write(resp.content)
-            res = fvw.predict([open(temp_filename_1,'rb'), open(temp_filename_2, 'rb')])
+            res = fvw.predict([open(temp_filename_1, 'rb'), open(temp_filename_2, 'rb')])
             os.remove(temp_filename_1)
             os.remove(temp_filename_2)
 
-            #res = fvw.predict([face_1, face_2])
+            # res = fvw.predict([face_1, face_2])
         print(res)
         return jsonify({
             "similarity": float(res[0][0]),
-            "Version":"Keras Application 1.0.7 @ Tensorflow 1.13 Backend",
+            "Version": "Keras Application 1.0.7 @ Tensorflow 1.13 Backend",
             "Model": {
                 "Info": "Siamese Network with Inception ResNet @ Iteration 4313 Epoch 4",
                 "url": "https://github.com/wylswz/twitter_pride_vanity/tree/master/algorithms/siamese_net",
@@ -81,7 +82,6 @@ def comparison():
             'error': str(e),
 
         })
-
 
 
 @app.route('/api/v1/face_detection', methods=['POST'])
@@ -113,7 +113,7 @@ def detection():
                     ml_res = fdw.predict(open(temp_filename, 'rb'))
                 elif model == Models.SSD_MOBILENET_V2:
                     ml_res = ssdw.predict(open(temp_filename, 'rb'))
-                os.remove(temp_filename) 
+                os.remove(temp_filename)
 
             limit = request.form.get('limit')
             faces = ml_res['detection_boxes'].tolist()
@@ -123,23 +123,22 @@ def detection():
                 faces = faces[:limit]
                 scores = scores[:limit]
 
-
             return jsonify({
                 'faces': faces,
-
                 'scores': scores,
                 'format': ['ymin', 'xmin', 'ymax', 'xmax'],
                 'version': 'Tensorflow 1.13.1',
                 'model': {
-                    "url":"https://github.com/tensorflow/models/tree/master/research/object_detection",
-                    "info":"{0} Object-Detection".format(model),
+                    "url": "https://github.com/tensorflow/models/tree/master/research/object_detection",
+                    "info": "{0} Object-Detection".format(model),
                     "dataset": "WIDERFace"
                 }
             })
         except Exception as e:
             return jsonify({
-                'error':str(e)
+                'error': str(e)
             })
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
