@@ -41,7 +41,6 @@ detect at most 20 faces in one image
         "xmax"
     ],
     "model": {
-        "author": "Refer to url",
         "dataset": "WIDERFace",
         "info": "Faster RCNN Object-Detection @Iteration 4066",
         "url": "https://github.com/tensorflow/models/tree/master/research/object_detection"
@@ -62,6 +61,11 @@ detect at most 20 faces in one image
 ### Request body (form data)
 - face_1: Image file that has face 1
 - face_2: Image file that has face 2
+- face_1_url(optional)
+- face_2_url(optional)
+
+Both images should be in same form. Mixing file and url is not
+ supported currently
 
 ### Response
 
@@ -69,7 +73,6 @@ detect at most 20 faces in one image
 {
     "Model": {
         "Info": "Siamese Network with Inception ResNet @ Iteration 4313 Epoch 4",
-        "author": "Yenyung Chang",
         "dataset": "vggface2",
         "url": "https://github.com/wylswz/twitter_pride_vanity/tree/master/algorithms/siamese_net"
     },

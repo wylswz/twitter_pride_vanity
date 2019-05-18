@@ -19,16 +19,18 @@ from scipy.misc import imresize
 from sklearn.model_selection import train_test_split
 import pardec
 
+
 def load_data(path):
     dataset = [line.rstrip('\n') for line in open(path)]
     dic_data = {}
     for data in dataset:
-        identity,photo = data.split('/')
+        identity, photo = data.split('/')
         if identity not in dic_data.keys():
-            dic_data.update({identity:[data]})
+            dic_data.update({identity: [data]})
         else:
             dic_data[identity].append(data)
     return dic_data
+
 
 def postive_training_set(data):
     postive_pair = []
@@ -36,23 +38,24 @@ def postive_training_set(data):
     print(list(ptd.keys())[:10])
     for idenity in list(ptd.keys()):
         photo_list = ptd[idenity]
-        while len(photo_list) >=2:
-            photo1, photo2 = np.random.choice(photo_list, 2, replace = False)
+        while len(photo_list) >= 2:
+            photo1, photo2 = np.random.choice(photo_list, 2, replace=False)
             postive_pair.append((photo1, photo2))
             label.append(1)
             photo_list.remove(photo1)
             photo_list.remove(photo2)
     return postive_pair, label
 
+
 def negative_training_set(data):
-    negative_pair=[]
+    negative_pair = []
     label = []
     id_list = list(ntd.keys())
-    while len(id_list)>= 2:
-        id1, id2 = np.random.choice(id_list, 2, replace = False)
+    while len(id_list) >= 2:
+        id1, id2 = np.random.choice(id_list, 2, replace=False)
         id1_photos = ntd[id1]
         id2_photos = ntd[id2]
-        while len(id1_photos) >= 1 and len(id2_photos)>=1:
+        while len(id1_photos) >= 1 and len(id2_photos) >= 1:
             photo1 = random.choice(id1_photos)
             photo2 = random.choice(id2_photos)
             negative_pair.append((photo1, photo2))
@@ -62,7 +65,8 @@ def negative_training_set(data):
         id_list.remove(id1)
         id_list.remove(id2)
 
-    return negative_pair , label
+    return negative_pair, label
+
 
 ptd = load_data('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_train/train/train_list.txt')
 ntd = load_data('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_train/train/train_list.txt')
@@ -82,14 +86,16 @@ random.shuffle(data)
 
 def tranfor_data(data):
     X = []
-    for x,y in data:
+    for x, y in data:
         x1, x2 = x
-        X.append((x1,x2,y))
+        X.append((x1, x2, y))
     return X
+
 
 data = tranfor_data(data)
 
 IMAGE_DIR = os.path.join('/home/johnny/Documents/TF_CONFIG/dataset/vgg/vggface2_train', "train")
+
 
 def im_decoder(image_filename):
     image = plt.imread(os.path.join(IMAGE_DIR, image_filename))
@@ -97,6 +103,7 @@ def im_decoder(image_filename):
     image = image.astype("float32")
     image = inception_v3.preprocess_input(image)
     return image
+
 
 '''def pair_generator(triples,  datagens, batch_size=32):
     while True:
@@ -122,15 +129,17 @@ def im_decoder(image_filename):
             yield [X1, X2], Y'''
 
 
-def pair_generator(triples,  datagens, batch_size=32):
+def pair_generator(triples, datagens, batch_size=32):
     while True:
         # shuffle once per batch
         indices = np.random.permutation(np.arange(len(triples)))
         num_batches = len(triples) // batch_size
         for bid in range(num_batches):
-            batch_indices = indices[bid * batch_size : (bid + 1) * batch_size]
+            batch_indices = indices[bid * batch_size: (bid + 1) * batch_size]
             batch = [triples[i] for i in batch_indices]
             yield (batch, batch_size,)
+
+
 def decoding_fn(sample):
     (batch, batch_size) = sample
     X1 = np.zeros((batch_size, 128, 128, 3))
@@ -172,23 +181,28 @@ print(len(data_train), len(data_val))
 
 datagens = [ImageDataGenerator(), ImageDataGenerator()]
 train_pair_gen = pair_generator(data_train, datagens, 32)
-train_pair_gen_ = pardec.ParallelDecoder(train_pair_gen, num_workers=6, cache_size=100, decoder=decoding_fn, deque_timeout=1000)
+train_pair_gen_ = pardec.ParallelDecoder(train_pair_gen, num_workers=6, cache_size=100, decoder=decoding_fn,
+                                         deque_timeout=1000)
 val_pair_gen = pair_generator(data_val, None, 32)
-val_pair_gen_ = pardec.ParallelDecoder(val_pair_gen, num_workers=6, cache_size=100, decoder=decoding_fn, deque_timeout=1000)
+val_pair_gen_ = pardec.ParallelDecoder(val_pair_gen, num_workers=6, cache_size=100, decoder=decoding_fn,
+                                       deque_timeout=1000)
 
 print(next(train_pair_gen_))
 print(next(val_pair_gen_))
 
 from keras.models import Sequential
+
+
 def create_based_model(trainable=False):
     pre_trained_model = inception_v3.InceptionV3(weights='imagenet', include_top=False, pooling='avg')
-#    pre_trained_model = DenseNet121(weights='imagenet', include_top=False, pooling='avg')
+    #    pre_trained_model = DenseNet121(weights='imagenet', include_top=False, pooling='avg')
     for layer in pre_trained_model.layers:
         layer.trainable = trainable
     seq = [pre_trained_model]
     if not trainable:
         seq.append(Dense(512))
     return Sequential(seq)
+
 
 def get_siamese_model():
     input_tensor_1 = Input(shape=(128, 128, 3))
@@ -201,29 +215,30 @@ def get_siamese_model():
     print('vector_1.shape: ', vector_1.shape)
     print('vector_2.shape: ', vector_2.shape)
 
-    distance = Lambda(lambda vec: K.abs(vec[0]-vec[1]))([vector_1, vector_2])
+    distance = Lambda(lambda vec: K.abs(vec[0] - vec[1]))([vector_1, vector_2])
     print('distance.shape: ', distance)
 
     outputs = Dense(1)(distance)
     outputs = Activation("sigmoid")(outputs)
 
-
     siamese_net = Model(inputs=[input_tensor_1, input_tensor_2], outputs=outputs)
-    return  siamese_net
+    return siamese_net
+
 
 model = get_siamese_model()
 
 optimizer = Adam(lr=0.0001, decay=5e-4)
 model.compile(loss="binary_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 
-num_train_steps = math.floor(len(data_train)/32)
-num_valid_steps = math.floor(len(data_val)/32)
+num_train_steps = math.floor(len(data_train) / 32)
+num_valid_steps = math.floor(len(data_val) / 32)
 early_stopping_callback = EarlyStopping(monitor='val_loss', patience=1)
-checkpoint_callback = ModelCheckpoint('siamese_model.h5', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+checkpoint_callback = ModelCheckpoint('siamese_model.h5', monitor='val_loss', verbose=1, save_best_only=True,
+                                      mode='min')
 csv_logger = CSVLogger("model_history_log.csv", append=True)
 history = model.fit_generator(train_pair_gen_,
                               steps_per_epoch=num_train_steps,
                               epochs=32,
-                              validation_data = val_pair_gen_,
-                              validation_steps= num_valid_steps,
+                              validation_data=val_pair_gen_,
+                              validation_steps=num_valid_steps,
                               callbacks=[checkpoint_callback, early_stopping_callback, csv_logger])
