@@ -19,6 +19,7 @@ services:
     
     volumes:
       - '/mnt/notebook:/notebook'
+      - '/mnt/zeppelin:/zeppelin'
     environment:
       - ZEPPELIN_NOTEBOOK_DIR=/notebook
       
