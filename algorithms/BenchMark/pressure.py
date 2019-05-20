@@ -2,7 +2,7 @@ import requests
 from multiprocessing import Pool
 test_url = "https://www.faceplusplus.com/scripts/demoScript/images/demo-pic4.jpg"
 
-comparison_url = 'http://103.6.254.149:8000/api/v1/face_detection'
+comparison_url = 'http://35.239.172.10:8000/api/v1/face_detection'
 
 def detection(image_file, limit, model):
     resp = requests.post(
@@ -31,10 +31,8 @@ def frcnn_wrapper(n):
 
 def pressure():
     a = list(range(100))
-    with Pool(4) as p:
+    with Pool(10) as p:
         p.map(ssd_wrapper, a)
-    with Pool(4) as p:
-        p.map(frcnn_wrapper,a)
 
 if __name__ == "__main__":
     pressure()
