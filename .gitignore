@@ -2,3 +2,4 @@
 *.h5
 *pycache*
 *.idea*
+*temp*

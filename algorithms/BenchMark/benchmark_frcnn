@@ -1,0 +1,12 @@
+Tested ssd with 2 threads on 300 samples, total time: 95.12171840667725
+Tested ssd with 4 threads on 300 samples, total time: 101.3385112285614
+Tested ssd with 6 threads on 300 samples, total time: 97.62754702568054
+Tested ssd with 8 threads on 300 samples, total time: 87.70982503890991
+Tested ssd with 10 threads on 300 samples, total time: 96.05012845993042
+Tested ssd with 12 threads on 300 samples, total time: 107.45885944366455
+Tested ssd with 14 threads on 300 samples, total time: 120.02543497085571
+Tested ssd with 16 threads on 300 samples, total time: 125.8725233078003
+Tested ssd with 18 threads on 300 samples, total time: 127.20947194099426
+Tested ssd with 20 threads on 300 samples, total time: 128.02338075637817
+Tested ssd with 22 threads on 300 samples, total time: 132.62091088294983
+Tested ssd with 24 threads on 300 samples, total time: 138.31440663337708

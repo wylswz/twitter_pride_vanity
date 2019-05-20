@@ -27,18 +27,11 @@ if __name__ == "__main__":
 
     sample_seed = 544
 
-    config_batch4_dir = './batch4lr0.004'
-    res_file = os.path.join(config_batch4_dir,'result.csv')
+    config_batch4_dir = './batch8lr0.004decay0.8'
+    res_file = os.path.join(config_batch4_dir, 'result.csv')
     if os.path.isfile(res_file):
         os.remove(res_file)
     df_batch4 = generate(config_batch4_dir)
     df_batch4.iloc[::5, :].round(2).to_csv(res_file)
     
 
-
-    config_batch8_lr0_004_dir = './batch8lr0.004'
-    res_file = os.path.join(config_batch8_lr0_004_dir,'result.csv')
-    if os.path.isfile(res_file):
-        os.remove(res_file)
-    df_batch8_lr0_004 = generate(config_batch8_lr0_004_dir)
-    df_batch8_lr0_004.iloc[::5, :].round(2).to_csv(res_file)

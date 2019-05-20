@@ -17,9 +17,9 @@ import time
 from PIL import Image
 import io
 
-BASE_DIR = '/zeppelin/data'
+BASE_DIR = './temp/'
 
-BASE_URL = 'http://35.239.172.10:8000'
+BASE_URL = 'http://45.113.235.235:8000'
 DETECTION_URL = '/api/v1/face_detection'
 COMPARISON_URL = '/api/v1/face_comparsion'
 
