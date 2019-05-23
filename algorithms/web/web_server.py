@@ -44,6 +44,7 @@ class Models:
 @app.route('/api/v1/face_comparison', methods=['POST'])
 def comparison():
     try:
+        res = {}
         if request.files.get('face_1') is not None and request.files.get('face_2') is not None:
             face_1 = request.files['face_1']
             face_2 = request.files['face_2']
@@ -78,6 +79,7 @@ def comparison():
             }
         })
     except Exception as e:
+        traceback.print_exc()
         return jsonify({
             'error': str(e),
 
@@ -135,6 +137,7 @@ def detection():
                 }
             })
         except Exception as e:
+            traceback.print_exc()
             return jsonify({
                 'error': str(e)
             })
