@@ -1,13 +1,11 @@
 import json
 import os
-import threading
-import time
 import traceback
-import requests
+
 import tweepy
 
-from demo.face_utils import face_with_high_scores, detect_face,face_pair
-from demo.config import BASE_DIR, face_detection_threshold, face_similarity_threshold, TMP_DIR
+from demo.config import BASE_DIR, face_detection_threshold
+from demo.face_utils import face_with_high_scores, detect_face, face_pair
 from demo.sys_utils import cache_image
 
 
@@ -15,6 +13,16 @@ class MyStreamListener(tweepy.StreamListener):
     counter = 0
 
     def on_data(self, data):
+        """
+        - Extract the user profile image
+        - Extract the images in post
+        - Running through face detection algorithms to find bounding boxes for
+            profile and each image in the post
+        - Pass a list of images and a list of list of bounding boxes to visualization
+            tool
+        :param data: Tweet object
+        :return:
+        """
         self.counter += 1
         try:
             plt_imgs = []
@@ -44,7 +52,6 @@ class MyStreamListener(tweepy.StreamListener):
                 plt_imgs.append(profile_file_name)
                 plt_bboxes.append(faces)
 
-
             for url in media_urls:
                 image_file_name = url.split('/')[-1]
                 image_file_name = os.path.join(user_path, image_file_name)
@@ -65,6 +72,14 @@ class MyStreamListener(tweepy.StreamListener):
 
 
 def get_client(custom_token, custom_secret, access_token, access_secret):
+    """
+    Authentication, get client
+    :param custom_token:
+    :param custom_secret:
+    :param access_token:
+    :param access_secret:
+    :return:
+    """
     auth = tweepy.OAuthHandler(custom_token, custom_secret)
     auth.set_access_token(access_token, access_secret)
     api = tweepy.API(auth)

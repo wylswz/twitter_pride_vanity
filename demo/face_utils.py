@@ -28,6 +28,16 @@ def bounding_box(img_file, bboxes: list):
 
 
 def face_pair(image_files, bboxes_lst):
+    """
+    - Crop all the faces in profile picture
+    - Crop all the faces in each post
+    - Compare the similarity between faces in profile pic and post
+    - Take the face with highest similarity
+    - Plot the pie chart
+    :param image_files:
+    :param bboxes_lst:
+    :return:
+    """
     num_picture = len(image_files)
     fig = plt.figure(num_picture)
     cnt = 1
@@ -103,6 +113,13 @@ def face_pair(image_files, bboxes_lst):
 
 
 def face_with_high_scores(faces, scores, threshold):
+    """
+    Find bboxes of faces in the image with a score above threshold
+    :param faces: List of bboxes
+    :param scores: List of scores
+    :param threshold:
+    :return:
+    """
     real_faces = []
     for i in range(len(faces)):
         if scores[i] > threshold:
@@ -111,6 +128,13 @@ def face_with_high_scores(faces, scores, threshold):
 
 
 def detect_face(image_file, limit=5, model='SSD_MOBILENET_V2'):
+    """
+    Detect all the faces in an image
+    :param image_file:
+    :param limit:
+    :param model:
+    :return:
+    """
     resp = requests.post(BASE_URL + DETECTION_URL,
                          files={
                              'image_file': image_file
