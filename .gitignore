@@ -1,3 +1,7 @@
 */venv/*
+venv*
 *.h5
 *pycache*
+*.idea*
+*temp*
+*.vscode*
