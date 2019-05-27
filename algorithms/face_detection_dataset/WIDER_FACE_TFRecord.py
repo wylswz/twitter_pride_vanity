@@ -1,21 +1,41 @@
-# On branch algorithms
+"""
+Maintainer Yunlu Wen <yunluw@student.unimelb.edu.au>
+
+this script is used to generate a TF_Record dataset from WIDER Face.
+
+usage:
+$ python3 WIDER_FACE_TFRecord.py --help
+$ python3 WIDER_FACE_TFRecord.py data_root annotation_path tfrecord_path
+
+
+Please install tensorflow/models/research/object_detection properly following the instructions
+https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md
+before using the code
+
+Setting PATHONPATH properly
+"""
 import argparse
 import tensorflow as tf
 import re, os, io, codecs, ast
 from object_detection.utils import dataset_util
 from PIL import  Image
+from multiprocessing.pool import Pool
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("data_root", help="root of data path")
 parser.add_argument("annotation_path", help="annotations")
 parser.add_argument("tfrecord_path", help="TFRecord path")
+args = parser.parse_args()
+ANNOTATION_PATH = args.annotation_path
+TRAIN_IMG_ROOT = args.data_root
+TF_RECORD_PATH = args.tfrecord_path
+NUM_WORKERS = 12
+CHUNK_SIZE = 1000
+
 
 """
-Please properly install tensorflow/models/research/object_detection properly following the instructions
-https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md
-before using the code
 
-Setting PATHONPATH is quite important
 """
 
 
@@ -37,17 +57,12 @@ def record_gen():
                 for i in range(num_samples):
                     bbox = fp.readline()
                     bbox = bbox.split(' ')
-args = parser.parse_args()
-
-NUM_WORKERS = 12
-CHUNK_SIZE = 1000
-
-from multiprocessing.pool import Pool
 
 
-ANNOTATION_PATH = args.annotation_path
-TRAIN_IMG_ROOT = args.data_root
-TF_RECORD_PATH = args.tfrecord_path
+
+
+
+
 
 def WIDER_record_gen():
     """
@@ -133,7 +148,11 @@ def WIDER_tf_sample(sample) -> tf.train.Example:
 
 
 def schedule(gen):
-
+    """
+    Draw elements from the generator and schedule for parallel processing
+    :param gen: A generator which gives data sample meta data
+    :return:
+    """
     try:
         writer = tf.python_io.TFRecordWriter(TF_RECORD_PATH)
         while True:

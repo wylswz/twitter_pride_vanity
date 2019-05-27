@@ -1,7 +1,10 @@
+"""
+
+"""
+
 import matplotlib.pyplot as plt
 import requests
 import json
-import uuid
 from io import BytesIO
 from PIL import Image
 from matplotlib.patches import Rectangle

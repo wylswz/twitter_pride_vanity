@@ -1,5 +1,20 @@
-# Author: Yunlu Wen <yunluw@student.unimelb.edu.au>
 
+"""
+Maintainer: Yunlu Wen <yunluw@student.unimelb.edu.au>
+This defines an abstract model wrapper schema for other machine learning guys
+to wrap their models
+
+Each wrapper should be able to:
+
+- Be instantiated with the path to the model
+- Load the model into memory using load() method
+- Accept a piece of data when prediction() is invoked
+- Pre-process the data
+- Do predictions
+- Post-process data
+- Return the prediction result at the end of prediction() method
+
+"""
 
 class ModelWrapper:
 

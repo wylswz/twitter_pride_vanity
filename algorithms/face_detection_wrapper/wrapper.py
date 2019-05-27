@@ -1,4 +1,13 @@
-# Author: Yunlu Wen <yunluw@student.unimelb.edu.au>
+"""
+Maintainer: Yunlu Wen <yunluw@student.unimelb.edu.au>
+
+Concrete face detection model wrapper classes are defined in this file
+
+FaceDetectionWrapper encapsulates a Faster R-CNN ResNet 101 model
+SSDWrapper encapsulates a SSD MobileNet V2 model
+
+
+"""
 
 from shared.ModelWrapper import ModelWrapper
 import tensorflow as tf

@@ -1,23 +1,22 @@
-# Author: Yenyung Chang <yenyungc@student.unimelb.edu.au>
 
-from keras.models import load_model
-from keras.preprocessing.image import img_to_array
-from keras.applications import inception_v3
-from PIL import Image
+"""
+Maintainer :
+    - Yenyung Chang <yenyungc@student.unimelb.edu.au>
+    - Yunlu Wen <yunluw@student.unimelb.edu.au>
+
+This is wrapper class for Siamese Net model which do face comparison
+"""
 import io
+
 import numpy as np
+from PIL import Image
+from keras.applications import inception_v3
+from keras.applications.imagenet_utils import preprocess_input
+from keras.models import load_model
+from keras.preprocessing.image import load_img, img_to_array
 from shared.ModelWrapper import ModelWrapper
 from tensorflow import Graph, Session
-from keras.models import Model, Sequential, load_model
-from keras.layers import Input, Convolution2D, ZeroPadding2D, MaxPooling2D, Flatten, Dense, Dropout, Activation
-from PIL import Image
-import numpy as np
-from keras.preprocessing.image import load_img, save_img, img_to_array
-from keras.applications.imagenet_utils import preprocess_input
-from keras.preprocessing import image
-from keras import models
-from keras.models import save_model
-import matplotlib.pyplot as plt
+
 
 class FaceVerification(ModelWrapper):
     def __init__(self, model_path):
