@@ -1,3 +1,9 @@
+"""
+Maintainer: Yunlu Wen <yunluw@student.unimelb.edu.au>
+
+Configurations for demo
+"""
+
 import os
 BASE_DIR = './temp/'
 TMP_DIR = os.path.join(BASE_DIR, 'tmp')
@@ -11,4 +17,6 @@ access_token = '1107074333698981889-bzffZA2f5djoFeV30veP1oHBLNXeab'
 access_secret = 'CMckhw2NaULIqKnp5DcIqcwJaE1nAyfT2SMqzbnxllGoY'
 
 face_detection_threshold = 0.4
-face_similarity_threshold = 0.5
+face_similarity_threshold = 0.75
+
+min_face_size = 48

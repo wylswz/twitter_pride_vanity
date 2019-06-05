@@ -1,5 +1,3 @@
-import os
-import uuid
 import requests
 
 def cache_image(im_url, path):

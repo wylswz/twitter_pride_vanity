@@ -1,5 +1,12 @@
 """
+Maintainer: Yunlu Wen <yunluw@student.unimelb.edu.au>
 
+Utilities
+- Showing images
+- Plotting bounding boxes
+- Detecting faces
+- Comparing faces
+- Face with high scores
 """
 
 import matplotlib.pyplot as plt
@@ -9,7 +16,7 @@ from io import BytesIO
 from PIL import Image
 from matplotlib.patches import Rectangle
 
-from demo.config import BASE_URL, DETECTION_URL, COMPARISON_URL, TMP_DIR
+from demo.config import BASE_URL, DETECTION_URL, COMPARISON_URL, TMP_DIR, face_similarity_threshold, min_face_size
 
 
 def bounding_box(img_file, bboxes: list):
@@ -30,18 +37,22 @@ def bounding_box(img_file, bboxes: list):
     plt.show(block=False)
 
 
-def face_pair(image_files, bboxes_lst):
+def face_pair(image_files, bboxes_lst, prof_file, prof_bboxes):
     """
     - Crop all the faces in profile picture
     - Crop all the faces in each post
     - Compare the similarity between faces in profile pic and post
     - Take the face with highest similarity
     - Plot the pie chart
-    :param image_files:
-    :param bboxes_lst:
+    :param prof_bboxes: List of bounding boxes in profile picture
+    :param prof_file: [str] profile image file
+    :param image_files: The image file in tweet
+    :param bboxes_lst: List of bounding boxes in tweet picture
     :return:
     """
-    num_picture = len(image_files)
+    plt.clf()
+    num_picture = len(image_files) + 1
+    # Plus profile photo
     fig = plt.figure(num_picture)
     cnt = 1
     assert len(image_files) == len(bboxes_lst)
@@ -50,10 +61,20 @@ def face_pair(image_files, bboxes_lst):
             return
     sim = []
     profile_faces = []
-    profile_img = image_files[0]
-    profile_bboxes = bboxes_lst[0]
+    profile_img = prof_file[0]
+    profile_bboxes = prof_bboxes
     profile = plt.imread(profile_img)
+
+    ax = fig.add_subplot(1, num_picture + 1, cnt, aspect='equal')
+    ax.title.set_text("Profile picture")
+    ax.title.set_text("Faces occurred in post")
+    ax.set_axis_off()
+    plt.imshow(profile)
+
     for bbox in profile_bboxes:
+        """
+        Construct a list of faces cropped from the profile picture
+        """
         (y, x, _) = profile.shape
         [ymin, xmin, ymax, xmax] = [
             int(y * bbox[0]),
@@ -68,44 +89,56 @@ def face_pair(image_files, bboxes_lst):
             tmp_file
         )
 
-
-
     for (image, bboxes) in zip(image_files, bboxes_lst):
-        print(image, bboxes)
+        """
+        For each photo in the tweet, create a new subplot
+        """
         img = plt.imread(image)
-        print(img.shape)
+
         (y, x, _) = img.shape
-        ax = fig.add_subplot(1, num_picture+1, cnt, aspect='equal')
-        if cnt == 1:
-            ax.title.set_text("Profile picture")
-        else:
-            ax.title.set_text("Faces occurred in post")
         cnt += 1
+        ax = fig.add_subplot(1, num_picture+1, cnt, aspect='equal')
+        ax.title.set_text("Profile picture")
+        ax.title.set_text("Faces occurred in post")
+
         ax.set_axis_off()
         plt.imshow(img)
         for bbox in bboxes:
+            """
+            For each face in the post, compare it to all the photos in profile picture
+            if the similarity is higher than the threshold, draw a green bounding box
+            otherwize draw a red one
+            """
             [ymin, xmin, ymax, xmax] = [
                 int(y * bbox[0]),
                 int(x * bbox[1]),
                 int(y * bbox[2]),
                 int(x * bbox[3])
             ]
-            this_face = BytesIO()
-            Image.fromarray(img[ymin:ymax, xmin:xmax]).save(this_face,format='png')
-            this_face.seek(0)
-            for profile_face in profile_faces:
-                this_face.seek(0)
-                profile_face.seek(0)
-                sim.append(
-                    compare_face(this_face, profile_face)['similarity']
-                )
 
-            rect = Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, linewidth=1, edgecolor='r', facecolor='none')
-            ax.add_patch(rect)
+            if abs(ymin - ymax) > min_face_size and abs(xmax - xmin) > min_face_size:
+                this_face = BytesIO()
+                Image.fromarray(img[ymin:ymax, xmin:xmax]).save(this_face,format='png')
+                this_face.seek(0)
+                tmp_sims = []
+                for profile_face in profile_faces:
+                    this_face.seek(0)
+                    profile_face.seek(0)
+                    similarity = compare_face(this_face, profile_face)['similarity']
+                    sim.append(
+                        similarity
+                    )
+                    tmp_sims.append(similarity)
+                color = 'r'
+                if max(tmp_sims) > face_similarity_threshold:
+                    color = 'g'
+                rect = Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, linewidth=1, edgecolor=color, facecolor='none')
+                ax.add_patch(rect)
+            else:
+                pass
     if len(sim) < 1:
         return
 
-    sim = sim[1:]
     max_sim = max(sim)
     labels = ['Narcissism', 'Non-Narcissism']
     fig.add_subplot(1, num_picture + 1, num_picture + 1, aspect='equal')
@@ -159,6 +192,5 @@ def compare_face(face_1, face_2):
             'face_2': face_2
         }
     )
-    print(resp.content)
 
     return json.loads(resp.content)

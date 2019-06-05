@@ -1,5 +1,6 @@
 """
-
+Maintainer: Yunlu Wen <yunluw@student.unimelb.edu.au>
+Twitter stream client for real time demo
 
 """
 
@@ -32,10 +33,10 @@ class MyStreamListener(tweepy.StreamListener):
         try:
             plt_imgs = []
             plt_bboxes = []
+            prof_img = []
+            prof_bboxes = []
             all_data = json.loads(data)
             user = all_data['user']
-            if user['screen_name'] == 'comp90048test':
-                print("catch me")
             user_profile = user['profile_image_url'].replace('_normal', '')
             media = all_data['entities']['media']
             media_urls = []
@@ -54,8 +55,8 @@ class MyStreamListener(tweepy.StreamListener):
                 resp = detect_face(fp)
                 faces = resp['faces']
                 faces = face_with_high_scores(faces, resp['scores'], face_detection_threshold)
-                plt_imgs.append(profile_file_name)
-                plt_bboxes.append(faces)
+                prof_img.append(profile_file_name)
+                prof_bboxes = faces
 
             for url in media_urls:
                 image_file_name = url.split('/')[-1]
@@ -67,7 +68,7 @@ class MyStreamListener(tweepy.StreamListener):
                     faces = face_with_high_scores(faces, resp['scores'], face_detection_threshold)
                     plt_imgs.append(image_file_name)
                     plt_bboxes.append(faces)
-            face_pair(plt_imgs, plt_bboxes)
+            face_pair(plt_imgs, plt_bboxes, prof_img, prof_bboxes)
         except Exception as e:
             traceback.print_exc()
         return True

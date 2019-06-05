@@ -1,5 +1,9 @@
-# Author: Yunlu Wen <yunluw@student.unimelb.edu.au>
-
+"""
+Maintainer: Yunlu Wen <yunluw@student.unimelb.edu.au>
+Web service for machine learning models. 
+- Load models by instanciating ModelWrapper class
+- Do predictions and return result
+"""
 from flask import Flask, request, jsonify
 from face_detection_wrapper.wrapper import FaceDetectionWrapper, SSDWrapper
 from siamese_wrapper.SiameseWrapper import FaceVerification

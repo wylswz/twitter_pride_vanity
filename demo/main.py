@@ -8,15 +8,12 @@ Functionality
 
 """
 
+from demo.config import custom_secret, custom_key, access_secret, access_token
 from demo.tweepy_client import get_client
-from demo.config import custom_secret,custom_key,access_secret,access_token
-
 
 def main():
-
     GEOBOX_AUSTRALIA = [112.921114, -43.740482, 159.109219, -9.142176]
     my_stream = get_client(custom_key, custom_secret, access_token, access_secret)
-
     my_stream.filter(follow=['1128897542630981632'])
 
 

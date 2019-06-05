@@ -51,12 +51,13 @@ def generate(dir):
 if __name__ == "__main__":
 
     sample_seed = 544
-
-    eval_dir = './batch8lr0.004decay0.8'
-    res_file = os.path.join(eval_dir, 'result.csv')
-    if os.path.isfile(res_file):
-        os.remove(res_file)
-    df = generate(eval_dir)
-    df.iloc[::5, :].round(2).to_csv(res_file)
+    eval_dirs = ['./batch8lr0.004decay0.8','./batch4lr0.004','./batch8lr0.004']
+    for eval_dir in eval_dirs:
+        res_file = os.path.join(eval_dir, 'result.csv')
+        if os.path.isfile(res_file):
+            os.remove(res_file)
+        df = generate(eval_dir)
+        #df = df.iloc[::5, :].round(2)
+        df.to_csv(res_file)
     
 
