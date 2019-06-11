@@ -1,5 +1,20 @@
 # API Reference
 
+## Deploy machine learning service
+
+Copy models (model.h5 for comparison, tf checkpoint for detections) to following dirs
+
+```yml
+      - "/mnt/models/face_detection
+      - "/mnt/models/face_comparison
+      - "/mnt/models/ssd
+```
+
+```sh
+sudo docker-compose up
+```
+
+
 ## Face detection
 ### /api/v1/face_detection
 
@@ -10,8 +25,7 @@
 - image_url: Or you can give url of the image. If url and file are given at the 
 same time, file will be used
 - limit: Limit on number of bounding boxes.
-- model: The model used for face detection. Available models
-are
+- model: The model used for face detection. Available models are:
     ```
     'SSD_MOBILENET_V2'
     'FASTER_RCNN_RESNET_101' # default
@@ -42,7 +56,7 @@ detect at most 20 faces in one image
     ],
     "model": {
         "dataset": "WIDERFace",
-        "info": "Faster RCNN Object-Detection @Iteration 4066",
+        "info": "Faster RCNN Object-Detection",
         "url": "https://github.com/tensorflow/models/tree/master/research/object_detection"
     },
     "scores": [
@@ -72,7 +86,7 @@ Both images should be in same form. Mixing file and url is not
 ```json
 {
     "Model": {
-        "Info": "Siamese Network with Inception ResNet @ Iteration 4313 Epoch 4",
+        "Info": "Siamese Network with Inception Net V3",
         "dataset": "vggface2",
         "url": "https://github.com/wylswz/twitter_pride_vanity/tree/master/algorithms/siamese_net"
     },
