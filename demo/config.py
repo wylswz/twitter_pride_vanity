@@ -20,3 +20,5 @@ face_detection_threshold = 0.4
 face_similarity_threshold = 0.75
 
 min_face_size = 48
+
+following_list = ['1128897542630981632']
